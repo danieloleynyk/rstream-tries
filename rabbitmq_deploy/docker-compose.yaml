@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  rabbitmq:
+    build:
+      dockerfile: ./Dockerfile
+      context: .
+    ports:
+      - "5552:5552" # RabbitMQ streams port
+      - "5672:5672"  # RabbitMQ default port
+      - "15672:15672"  # RabbitMQ Management UI port
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+      RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: '-rabbitmq_stream advertised_host localhost'
